@@ -10,6 +10,7 @@ TagManager:
   - Sword
   - Money
   - Points
+  - ColliderEnabler
   layers:
   - Default
   - TransparentFX

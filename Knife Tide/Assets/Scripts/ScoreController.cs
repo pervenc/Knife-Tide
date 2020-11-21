@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class ScoreController : MonoBehaviour
 {
-    public Text scoreText, moneyText;
-    [HideInInspector] public float scoreCount, moneyCount;
+    public Text scoreText, moneyText, timeText, highScoreText;
+    [HideInInspector] public float scoreCount, highScoreCount, moneyCount;
 
     public GameObject sword;
 
@@ -26,6 +26,14 @@ public class ScoreController : MonoBehaviour
         {
             swordInitialNegativeYPos = 0;
         }
+        if (PlayerPrefs.GetFloat("highScore") > 0)
+        {
+            highScoreCount = PlayerPrefs.GetFloat("highScore");
+        }
+        else
+        {
+            highScoreCount = 0;
+        }
 
         //  moneyCount = PlayerPrefs.GetFloat("MoneyCount");
     }
@@ -36,11 +44,22 @@ public class ScoreController : MonoBehaviour
         {
             scoreCount = sword.transform.position.y + swordInitialNegativeYPos + scoreBonusValue;
 
-          
+
+        }
+        if (scoreCount > highScoreCount)
+        {
+            highScoreCount = scoreCount;
+
+            PlayerPrefs.SetFloat("higScore", scoreCount);
         }
 
-        scoreText.text = "S." + Mathf.Round(scoreCount);
-        moneyText.text = "$." + Mathf.Round(moneyCount);
+        scoreText.text = "S. " + Mathf.Round(scoreCount);
+        highScoreText.text = "HS. " + Mathf.Round(highScoreCount);
+
+        timeText.text = "T. " + Time.timeSinceLevelLoad.ToString("F1");/* (Mathf.Round(Time.timeSinceLevelLoad * 10.0f)) / 10.0f;*/
+
+        
+        moneyText.text = "$. " + Mathf.Round(moneyCount);
 
     }
 }

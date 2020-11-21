@@ -32,15 +32,10 @@ public class CameraFollow2 : MonoBehaviour
         levelMinY = levelStartPos + (camWidth / 2);
         levelMaxY = levelEndPos - (camWidth / 2);
 
-
-
-
-
     }
 
     void FixedUpdate()
     {
-
 
         /* if (target && sword.GetComponent<SwordAttack>().grounded == false && this.transform.position.y < target.position.y)
         {
@@ -49,10 +44,6 @@ public class CameraFollow2 : MonoBehaviour
             transform.position = new Vector3(transform.position.x, y, transform.position.z);
         
         }*/
-
-
-
-
 
     }
 

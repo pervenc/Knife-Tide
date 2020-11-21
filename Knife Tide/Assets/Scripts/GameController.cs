@@ -25,12 +25,13 @@ public class GameController : MonoBehaviour
         GameOver();
 
 
+
     }
     public void GameOver()
     {
         if (gameIsOver)
         {
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("Game");
 
             PlayerPrefs.SetFloat("MoneyCount", scoreController.GetComponent<ScoreController>().moneyCount);
         }
@@ -40,10 +41,35 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("escape"))
         {
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("Game");
 
             PlayerPrefs.SetFloat("MoneyCount", scoreController.GetComponent<ScoreController>().moneyCount);
 
         }
+    }
+
+    public void ButtonTest()
+    {
+
+        SceneManager.LoadScene("Game");
+
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("QUIT GAME");
+
+        Application.Quit();
+
+    }
+
+    public void PlayGame()
+    {
+
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

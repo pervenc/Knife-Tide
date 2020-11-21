@@ -31,7 +31,7 @@ public class WallGenerator : MonoBehaviour
     void MoveGenerator()
     {
         randomYValue = Random.Range(-5f, 6f);
-        Instantiate(wall, new Vector3(transform.position.x + 11.5f, transform.position.y + randomYValue, transform.position.z), Quaternion.Euler(0, 0, 90));
+      Instantiate(wall, new Vector3(transform.position.x + 11.5f, transform.position.y + randomYValue, transform.position.z), Quaternion.Euler(0, 0, 90));
 
         randomYValue = Random.Range(-5f, 6f);
         Instantiate(wall, new Vector3(transform.position.x - 11.5f, transform.position.y + randomYValue, transform.position.z), Quaternion.Euler(0, 180, 90));
