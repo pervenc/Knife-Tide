@@ -135,5 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minMoneyValue: 0
   maxMoneyValue: 0
-  minPointsValue: 21
-  maxPointsValue: 33
+  minPointsValue: 5
+  maxPointsValue: 10

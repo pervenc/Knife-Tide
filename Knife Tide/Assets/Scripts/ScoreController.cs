@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class ScoreController : MonoBehaviour
 {
     public Text scoreText, moneyText, timeText, highScoreText;
+
     [HideInInspector] public float scoreCount, highScoreCount, moneyCount;
+
+    private string sceneName;
 
     public GameObject sword;
 
@@ -16,16 +20,11 @@ public class ScoreController : MonoBehaviour
 
     void Start()
     {
+
+
+        sceneName = SceneManager.GetActiveScene().name;
         scoreBonusValue = 0f;
 
-        if (sword.transform.position.y < 0)
-        {
-            swordInitialNegativeYPos = -sword.transform.position.y;
-        }
-        else
-        {
-            swordInitialNegativeYPos = 0;
-        }
         if (PlayerPrefs.GetFloat("highScore") > 0)
         {
             highScoreCount = PlayerPrefs.GetFloat("highScore");
@@ -35,22 +34,50 @@ public class ScoreController : MonoBehaviour
             highScoreCount = 0;
         }
 
-        //  moneyCount = PlayerPrefs.GetFloat("MoneyCount");
+
+        if (sceneName == "Game")
+        {
+
+            if (sword.transform.position.y < 0)
+            {
+                swordInitialNegativeYPos = -sword.transform.position.y;
+            }
+            else
+            {
+                swordInitialNegativeYPos = 0;
+            }
+
+
+        }
     }
 
     void Update()
     {
+        if (sceneName == "Game")
+        {
+            GameScoreController();
+        }
+        else
+        {
+            MenuScoreController();
+        }
+
+    }
+
+    public void GameScoreController()
+    {
+
         if (sword.transform.position.y + swordInitialNegativeYPos + scoreBonusValue >= 0)
         {
             scoreCount = sword.transform.position.y + swordInitialNegativeYPos + scoreBonusValue;
 
 
         }
-        if (scoreCount > highScoreCount)
+        if (scoreCount >= highScoreCount)
         {
             highScoreCount = scoreCount;
 
-            PlayerPrefs.SetFloat("higScore", scoreCount);
+            PlayerPrefs.SetFloat("highScore", scoreCount);
         }
 
         scoreText.text = "S. " + Mathf.Round(scoreCount);
@@ -58,8 +85,32 @@ public class ScoreController : MonoBehaviour
 
         timeText.text = "T. " + Time.timeSinceLevelLoad.ToString("F1");/* (Mathf.Round(Time.timeSinceLevelLoad * 10.0f)) / 10.0f;*/
 
-        
+
         moneyText.text = "$. " + Mathf.Round(moneyCount);
+    }
+    public void MenuScoreController()
+    {
+
+        highScoreText.text = "" + Mathf.Round(highScoreCount);
+
+
+
+        //scoreText.text = "S. " + Mathf.Round(scoreCount);
+
+        //  timeText.text = "T. " + Time.timeSinceLevelLoad.ToString("F1");/* (Mathf.Round(Time.timeSinceLevelLoad * 10.0f)) / 10.0f;*/
+
+
+        //moneyText.text = "$. " + Mathf.Round(moneyCount);
+    }
+
+    public void ResetHighScore()
+    {
+        highScoreCount = 0;
+
+        PlayerPrefs.SetFloat("highScore", highScoreCount);
+        highScoreText.text = "" + Mathf.Round(highScoreCount);
 
     }
+
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemsGenerator : MonoBehaviour
 {
 
-    public GameObject sword, apple, goldCoin, silverCoin;
+    public GameObject sword, apple, goldCoin, silverCoin, skull;
     private GameObject finalItem;
     private float randomYValue, whichItem;
     private Vector3 updatePosition;
@@ -38,7 +38,16 @@ public class ItemsGenerator : MonoBehaviour
             }
             else if (whichItem <= 90)
             {
-                finalItem = silverCoin;
+                if (Random.Range(0, 100) < 40)
+                {
+                    finalItem = silverCoin;
+                }
+                else
+                {
+                    finalItem = skull;
+
+                }
+
 
             }
             else

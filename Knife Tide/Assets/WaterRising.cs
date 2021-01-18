@@ -14,10 +14,14 @@ public class WaterRising : MonoBehaviour
 
     private bool outOfScreen;
 
+    private GameObject theGameController;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        theGameController = GameObject.FindGameObjectWithTag("TheGameController");
 
 
     }
@@ -25,45 +29,49 @@ public class WaterRising : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distanceBetweenSW = Mathf.Abs(sword.transform.position.y - waterReferencePoint.transform.position.y);
-
-        if (cameraPosition.position.y - waterReferencePoint.position.y >= 26)
+        if (!GameController.gameIsPaused)
         {
-            outOfScreen = true;
+
+            distanceBetweenSW = Mathf.Abs(sword.transform.position.y - waterReferencePoint.transform.position.y);
+
+            if (cameraPosition.position.y - waterReferencePoint.position.y >= 26)
+            {
+                outOfScreen = true;
+            }
+            else
+            {
+                outOfScreen = false;
+            }
+
+
+            if (outOfScreen)
+            {
+                waterRisingForce = 50;
+                //waterRisingForce = Mathf.Pow(distanceBetweenSW, 2);
+                //transform.position = new Vector3(transform.position.x, camera.transform.position.y - 16, transform.position.z);
+            }
+            else if (distanceBetweenSW >= 13)
+            {
+                waterRisingForce = distanceBetweenSW / 6;
+                //  waterRisingForce = 2;
+
+
+            }
+            else if (distanceBetweenSW >= 6)
+
+            {
+                waterRisingForce = distanceBetweenSW / 9;
+                // waterRisingForce = 1;
+            }
+            else
+            {
+                //waterRisingForce = distanceBetweenSW / 16;
+                waterRisingForce = distanceBetweenSW / 15;
+
+
+            }
+
         }
-        else
-        {
-            outOfScreen = false;
-        }
-
-
-        if (outOfScreen)
-        {
-            waterRisingForce = 50;
-            //waterRisingForce = Mathf.Pow(distanceBetweenSW, 2);
-            //transform.position = new Vector3(transform.position.x, camera.transform.position.y - 16, transform.position.z);
-        }
-        else if (distanceBetweenSW >= 13)
-        {
-            waterRisingForce = distanceBetweenSW / 6;
-            //  waterRisingForce = 2;
-
-
-        }
-        else if (distanceBetweenSW >= 6)
-
-        {
-            waterRisingForce = distanceBetweenSW / 9;
-            // waterRisingForce = 1;
-        }
-        else
-        {
-            //waterRisingForce = distanceBetweenSW / 16;
-            waterRisingForce = distanceBetweenSW / 15;
-
-
-        }
-
 
 
 
@@ -72,8 +80,11 @@ public class WaterRising : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(rb.velocity.x, waterRisingForce);
+        if (!GameController.gameIsPaused)
+        {
 
+            rb.velocity = new Vector2(rb.velocity.x, waterRisingForce);
+        }
     }
 
 }

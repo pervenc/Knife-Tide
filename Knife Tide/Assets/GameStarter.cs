@@ -38,7 +38,7 @@ public class GameStarter : MonoBehaviour
 
     public void BlackOutToGame()
     {
-
+      
         SceneManager.LoadScene("Game");
     }
 
@@ -46,5 +46,5 @@ public class GameStarter : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-
+    
 }

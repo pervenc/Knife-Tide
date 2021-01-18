@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public GameObject scoreController;
 
     [HideInInspector] public bool gameIsOver;
+
+    public static bool gameIsPaused;
+    public GameObject gameMenu, scoreAndButton, fadeMenu;
     void Start()
     {
 
@@ -19,12 +22,13 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameIsPaused = false;
         ResetGame();
 
 
         GameOver();
 
-
+        //  Debug.Log(gameIsPaused);
 
     }
     public void GameOver()
@@ -63,13 +67,48 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void PlayGame()
+
+
+    public void MainMenuFadeOn()
     {
+        fadeMenu.GetComponent<Animator>().Play("FadeMenuOn");
 
     }
-
     public void MainMenu()
     {
         SceneManager.LoadScene("Menu");
+
+    }
+
+    public void MenuOnButton()
+    {
+        gameIsPaused = true;
+        Debug.Log(gameIsPaused);
+        gameMenu.GetComponent<Animator>().Play("MenuOn");
+        scoreAndButton.GetComponent<Animator>().Play("ScoreOut");
+        fadeMenu.GetComponent<Animator>().Play("FadeMenuOn");
+
+
+    }
+    public void MenuOffButton()
+    {
+        gameIsPaused = false;
+        gameMenu.GetComponent<Animator>().Play("MenuOff");
+        scoreAndButton.GetComponent<Animator>().Play("ScoreIn");
+        fadeMenu.GetComponent<Animator>().Play("FadeMenuOff");
+
+
+    }
+
+    public void PauseGame()
+    {
+        if (Time.timeScale > 0)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }

@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815b79f1b17486c4f8eaf641fca9a778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minMoneyValue: 21
-  maxMoneyValue: 33
-  minPointsValue: 0
-  maxPointsValue: 0
+  minMoneyValue: 0
+  maxMoneyValue: 0
+  minPointsValue: 30
+  maxPointsValue: 40

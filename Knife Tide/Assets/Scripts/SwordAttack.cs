@@ -103,9 +103,10 @@ public class SwordAttack : MonoBehaviour
     public void SwordAttackFunction()
     {
 
+
         //  if ((Input.touchCount > 0 || Input.GetKeyDown("space")) && grounded)
         //  if (Input.GetKeyDown("space") && grounded)
-        if (grounded)
+        if (grounded && !GameController.gameIsPaused)
         {
             swordObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 

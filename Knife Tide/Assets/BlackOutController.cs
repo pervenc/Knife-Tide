@@ -22,4 +22,6 @@ public class BlackOutController : MonoBehaviour
     {
         blackOutImage.SetActive(true);
     }
+
+    
 }
